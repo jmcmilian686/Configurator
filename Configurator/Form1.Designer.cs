@@ -93,7 +93,7 @@
             this.confGrid.Name = "confGrid";
             this.confGrid.Size = new System.Drawing.Size(139, 28);
             this.confGrid.TabIndex = 8;
-            this.confGrid.Text = "Configure Chutes";
+            this.confGrid.Text = "Configure Grids";
             this.confGrid.UseVisualStyleBackColor = true;
             this.confGrid.Visible = false;
             this.confGrid.Click += new System.EventHandler(this.button1_Click);
@@ -159,7 +159,7 @@
             // newGridToolStripMenuItem
             // 
             this.newGridToolStripMenuItem.Name = "newGridToolStripMenuItem";
-            this.newGridToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
+            this.newGridToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.newGridToolStripMenuItem.Text = "New Grid";
             this.newGridToolStripMenuItem.Click += new System.EventHandler(this.newGridToolStripMenuItem_Click);
             // 
