@@ -47,7 +47,7 @@ namespace Configurator
         public int enterindqueue { get; set; }
 
         public int rightmost { get; set; }
-        
+
         public string saveDir { get; set; }
 
         public Boolean pressed { get; set; }
@@ -70,13 +70,13 @@ namespace Configurator
             string tag = b.Text;
             actualRfid = tag;
             var tagBtn = b.Parent.Tag;
-            
+
             using (Rfid rfidForm = new Rfid(tag))
             {
                 if (rfidForm.ShowDialog() == DialogResult.Cancel)
                 {
                     actualRfid = rfidForm.TheValue;
-                    var selBtn = panel2.Controls.Find(tagBtn.ToString(),true);
+                    var selBtn = panel2.Controls.Find(tagBtn.ToString(), true);
                     if (selBtn.Count() > 0)
                     {
                         selBtn[0].Text = "RFID";
@@ -87,7 +87,7 @@ namespace Configurator
             }
 
             //Search and replace the value
-            if (mapFile.Count()>0)
+            if (mapFile.Count() > 0)
             {
                 for (int i = 0; i < mapFile.Count(); i++)
                 {
@@ -104,41 +104,43 @@ namespace Configurator
 
                     if (flag)
                     {
-                        string newStr =String.Join(",", strSearch.ToArray());
+                        string newStr = String.Join(",", strSearch.ToArray());
                         mapFile[i] = newStr;
                         break;
                     }
                 }
             }
             b.Text = actualRfid;
-            
+
 
         }
 
         private void Mouse_Click(Object s, EventArgs e)
         {
-            
+
             Button btn = new Button();
             btn = (Button)s;
-           
-                if (comboBox2.SelectedItem != null && pressed)
-                {
-                    genCounter++;
-                    textBox1.Text = genCounter.ToString();
+
+            if (comboBox2.SelectedItem != null && pressed)
+            {
+                genCounter++;
+                textBox1.Text = genCounter.ToString();
                 if (checkBox1.Checked && comboBox4.SelectedItem != null)
                 {
-                    btn.Text = comboBox4.SelectedItem.ToString()+ comboBox1.SelectedItem.ToString() + comboBox2.SelectedItem.ToString() + comboBox3.SelectedItem.ToString() + genCounter.ToString("d2");
+                    btn.Text = comboBox4.SelectedItem.ToString() + comboBox1.SelectedItem.ToString() + comboBox2.SelectedItem.ToString() + comboBox3.SelectedItem.ToString() + genCounter.ToString("d2");
 
                 }
-                else {
+                else
+                {
 
                     btn.Text = comboBox1.SelectedItem.ToString() + comboBox2.SelectedItem.ToString() + comboBox3.SelectedItem.ToString() + genCounter.ToString("d2");
                 }
 
 
             }
- 
-            else {
+
+            else
+            {
 
                 string message = "Please Select a Section letter.";
                 string caption = "No Section";
@@ -155,13 +157,13 @@ namespace Configurator
 
         private void Mouse_Over(Object s, EventArgs e)
         {
-            
+
             Button btn = new Button();
             btn = (Button)s;
 
-            if ( (ModifierKeys & Keys.Control) == Keys.Control)
+            if ((ModifierKeys & Keys.Control) == Keys.Control)
             {
-                
+
                 if (comboBox2.SelectedItem != null && pressed)
                 {
                     genCounter++;
@@ -182,15 +184,15 @@ namespace Configurator
             }
 
 
-            
-            
-            
+
+
+
 
         }
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-           
+
 
         }
 
@@ -222,7 +224,8 @@ namespace Configurator
                     comboBox2.Items.Add(el);
                 }
 
-                foreach (var el1 in b) {
+                foreach (var el1 in b)
+                {
                     comboBox4.Items.Add(el1);
                 }
                 elements = 0;
@@ -237,7 +240,7 @@ namespace Configurator
                 string[] linesMap = System.IO.File.ReadAllLines(serverDirectory + "\\grid.map");
 
                 mapFile = linesMap;
-                    
+
 
                 string[] gridPhi = System.IO.File.ReadAllLines(serverDirectory + "\\grid.physical");
 
@@ -298,18 +301,18 @@ namespace Configurator
                         btn.Enabled = false;
                         btn.ForeColor = Color.Black;
                         btn.Name = "btn" + newpos.X.ToString() + newpos.Y.ToString();
-                        
+
 
                         ToolTip ToolTip1 = new ToolTip();
                         ToolTip1.SetToolTip(btn, (newpos.X / btnW).ToString() + "-" + (newpos.Y / btnH).ToString());
                         var xList = linesMap[Convert.ToInt32(elems[1])].ToString().Split(',');
                         string rfid = xList[Convert.ToInt32(elems[0])].ToString();
-                        
+
 
                         ContextMenu cm = new ContextMenu();
                         cm.Tag = btn.Name;
                         cm.MenuItems.Add(rfid, new EventHandler(RFID_Rep));
-                        
+
                         btn.ContextMenu = cm;
                         btn.Enabled = true;
                         switch (elems[2])
@@ -319,7 +322,7 @@ namespace Configurator
                                 //btn.Enabled = true;
                                 btn.Click += new EventHandler(Mouse_Click);
                                 btn.MouseEnter += new EventHandler(Mouse_Over);
-                                
+
                                 elements++;
 
                                 int posX = Convert.ToInt32(elems[0]);
@@ -334,36 +337,36 @@ namespace Configurator
                                 break;
                             case "1":
                                 btn.BackColor = Color.FromArgb(252, 240, 5);
-                               
+
                                 working++;
                                 break;
                             case "11":
                                 btn.BackColor = Color.FromArgb(255, 255, 255);
-                                
+
                                 parking++;
                                 break;
                             case "5":
                                 btn.BackColor = Color.FromArgb(242, 109, 96);
-                                
+
                                 break;
                             case "7":
                                 btn.BackColor = Color.FromArgb(34, 201, 56);
-                                
+
                                 induction++;
                                 break;
                             case "2":
                                 btn.BackColor = Color.FromArgb(202, 116, 237);
-                                
+
                                 indqueue++;
                                 break;
                             case "10":
                                 btn.BackColor = Color.FromArgb(0, 255, 225);
-                                
+
                                 enterindqueue++;
                                 break;
                             case "4":
                                 btn.BackColor = Color.FromArgb(255, 114, 0);
-                                
+
                                 charging++;
                                 break;
                             default:
@@ -454,10 +457,10 @@ namespace Configurator
 
 
             //info labels
-            
+
         }
 
-      
+
 
 
 
@@ -477,12 +480,12 @@ namespace Configurator
             }
         }
 
-       
+
 
         private void button2_Click(object sender, EventArgs e)
         {
 
-            if (comboBox1.SelectedItem != null && comboBox2!= null && comboBox3 != null)
+            if (comboBox1.SelectedItem != null && comboBox2 != null && comboBox3 != null)
             {
                 string message = "You are about to start, please press Ctrl while you move the Mouse over the blocks";
                 string caption = "Starting";
@@ -497,7 +500,8 @@ namespace Configurator
 
 
             }
-            else {
+            else
+            {
 
                 string message = "Please Select a Section letter a Level and a Side to start.";
                 string caption = "No Section, Level or Side";
@@ -506,10 +510,10 @@ namespace Configurator
 
                 // Displays the MessageBox.
 
-               result =  MessageBox.Show(message, caption, buttons);
+                result = MessageBox.Show(message, caption, buttons);
             }
 
-            
+
 
 
         }
@@ -540,16 +544,16 @@ namespace Configurator
                 {
                     size++;
                 }
-                
+
             }
-            
+
             if (header[1] != "")
             {
-                size+= 2;
+                size += 2;
             }
             else
             {
-                size +=1;
+                size += 1;
             }
             string[] savestr = new string[size];
 
@@ -563,12 +567,13 @@ namespace Configurator
             {
                 counter = 1;
             }
-            
-           // foreach (GridMatrix gm in matrix.OrderBy(p=>p.GridValue))
-           foreach(Control cnt in panel2.Controls)
+
+            // foreach (GridMatrix gm in matrix.OrderBy(p=>p.GridValue))
+            foreach (Control cnt in panel2.Controls)
             {
-                if (cnt is Button && cnt.Text!="") {
-                    string newline = cnt.Text + "\t" + "Chute" + "\t" + (cnt.Location.X/btnW).ToString() + "\t" + (cnt.Location.Y / btnH).ToString();
+                if (cnt is Button && cnt.Text != "")
+                {
+                    string newline = cnt.Text + "\t" + "Chute" + "\t" + (cnt.Location.X / btnW).ToString() + "\t" + (cnt.Location.Y / btnH).ToString();
                     savestr[counter++] = newline;
                 }
 
@@ -602,7 +607,8 @@ namespace Configurator
 
 
             }
-            else {
+            else
+            {
 
                 string newPath = serverDirectory + "\\grid.physical";
                 if (File.Exists(newPath))
@@ -631,7 +637,7 @@ namespace Configurator
 
         }
 
-        
+
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
@@ -666,7 +672,7 @@ namespace Configurator
                         // write text and generate a 2-D barcode as a bitmap
                         barcodeWriter
                             .Write(gm.GridValue)
-                            .Save(@saveDir+"\\"+gm.GridValue+".bmp");
+                            .Save(@saveDir + "\\" + gm.GridValue + ".bmp");
                     }
 
                 }
@@ -687,7 +693,7 @@ namespace Configurator
 
         public Dictionary<string, int> PatternId()
         {
-            Dictionary<string,int> letters = new Dictionary<string,int>();
+            Dictionary<string, int> letters = new Dictionary<string, int>();
 
             List<Control> btns = new List<Control>();
 
@@ -703,7 +709,7 @@ namespace Configurator
                         {
                             if (letters.Where(p => p.Key == elem1.Text).Count() == 0)
                             {
-                                letters.Add(elem1.Text,0);
+                                letters.Add(elem1.Text, 0);
                             }
                         }
                         else if (elem1.Text.Length > 1)
@@ -712,7 +718,7 @@ namespace Configurator
                             string lett = elem1.Text.Substring(1, 1);
                             if (letters.Where(p => p.Key == lett).Count() == 0)
                             {
-                                letters.Add(lett,0);
+                                letters.Add(lett, 0);
                             }
 
                         }
@@ -731,7 +737,7 @@ namespace Configurator
                     int Ytop = 0;
                     int Ybot = 0;
 
-                    List<Control> btnsLet = btns.Where(p => p.Text == lett.Key ||(p.Text.Length>2 && p.Text.Substring(1, 1) == lett.Key)).ToList();
+                    List<Control> btnsLet = btns.Where(p => p.Text == lett.Key || (p.Text.Length > 2 && p.Text.Substring(1, 1) == lett.Key)).ToList();
 
                     foreach (Button btn in btnsLet)
                     {
@@ -740,7 +746,8 @@ namespace Configurator
                             Xlft = btn.Location.X;
                             Ytop = btn.Location.Y;
                         }
-                        else {
+                        else
+                        {
 
                             if (btn.Location.X > Xrgt)
                             {
@@ -760,18 +767,19 @@ namespace Configurator
                     {
                         var ctrls = panel2.Controls.Cast<Control>();
 
-                        int elemCount = ctrls.Where(l => l.Location.X < Xlft && l.Location.Y<Ybot && l.Location.Y>Ytop).Count();
+                        int elemCount = ctrls.Where(l => l.Location.X < Xlft && l.Location.Y < Ybot && l.Location.Y > Ytop).Count();
 
                         if (elemCount > 0)
                         {
                             auXletters[lett.Key] = 7;
                         }
-                        else {
+                        else
+                        {
 
                             auXletters[lett.Key] = 1;
                         }
 
-                        
+
                     }
 
                     if ((Xrgt - Xlft) < (Ybot - Ytop))//case 2 U shape
@@ -797,7 +805,7 @@ namespace Configurator
 
                         int elemCount = ctrls.Where(l => l.Location.Y < Ytop && l.Location.X > Xlft && l.Location.X < Xrgt).Count();
 
-                        if (countBt >= 2 && elemCount >0)
+                        if (countBt >= 2 && elemCount > 0)
                         {
                             auXletters[lett.Key] = 3;
                         }
@@ -811,9 +819,9 @@ namespace Configurator
 
                         var ctrls = panel2.Controls.Cast<Control>();
 
-                        int elemCount = ctrls.Where(l => l.Location.X < Xlft && l.Location.Y> Ytop && l.Location.Y <Ybot).Count();
+                        int elemCount = ctrls.Where(l => l.Location.X < Xlft && l.Location.Y > Ytop && l.Location.Y < Ybot).Count();
 
-                        if (countBt >= 2 && elemCount >0)
+                        if (countBt >= 2 && elemCount > 0)
                         {
                             auXletters[lett.Key] = 4;
                         }
@@ -827,7 +835,7 @@ namespace Configurator
 
                         var ctrls = panel2.Controls.Cast<Control>();
 
-                        int elemCount = ctrls.Where(l => l.Location.X > Xrgt && l.Location.Y >Ytop && l.Location.Y < Ybot).Count();
+                        int elemCount = ctrls.Where(l => l.Location.X > Xrgt && l.Location.Y > Ytop && l.Location.Y < Ybot).Count();
 
                         if (countBt <= 2 && elemCount > 0)
                         {
@@ -846,10 +854,11 @@ namespace Configurator
                         {
                             auXletters[lett.Key] = 8;
                         }
-                        else {
+                        else
+                        {
                             auXletters[lett.Key] = 6;
                         }
-                        
+
                     }
 
                 }
@@ -858,7 +867,7 @@ namespace Configurator
             return auXletters;
         }
 
-       
+
 
         private void button7_Click(object sender, EventArgs e)
         {
@@ -868,7 +877,7 @@ namespace Configurator
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            genCounter =Convert.ToInt32(textBox1.Text);
+            genCounter = Convert.ToInt32(textBox1.Text);
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
@@ -877,7 +886,8 @@ namespace Configurator
             {
                 comboBox4.Enabled = true;
             }
-            else {
+            else
+            {
                 comboBox4.Enabled = false;
             }
         }
@@ -913,38 +923,83 @@ namespace Configurator
         private void button8_Click(object sender, EventArgs e)
         {
             var filePath = string.Empty;
-            List<string> barcodesData = new List<string>(); 
+            List<string> barcodesData = new List<string>();
             string[] gridPhi = System.IO.File.ReadAllLines(serverDirectory + "\\grid.physical");
             List<string> locations = new List<string>();
             List<string> barcodeFile = new List<string>();
+            Random random = new Random();
 
+            string[] actions = { "PUT", "PUT BACK", "PUT FRONT" };
 
             foreach (var item in gridPhi)
             {
                 var newstring = item.Split('\t');
-                if (newstring.Length >1)
+                if (newstring.Length > 1)
                 {
                     locations.Add(newstring[0]);
                 }
             }
-            if (openFileDialog1.ShowDialog()==DialogResult.OK)
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 filePath = openFileDialog1.FileName;
                 barcodesData = System.IO.File.ReadAllLines(filePath).ToList();
             }
 
-            if (barcodesData.Count()>0)
+            if (barcodesData.Count() > 0)
             {
+                int bcIndex = 0;
+                foreach (var location in locations)
+                {
+                    if (bcIndex < barcodesData.Count())
+                    {
+                        string newLine = barcodesData[bcIndex++] + '\t' + location + '\t' + actions[random.Next(0, actions.Length)] + '\t' + '\t' + "default";
+                        barcodeFile.Add(newLine);
+                    }
 
+                    if (bcIndex >= barcodesData.Count())
+                    {
+                        bcIndex = 0;
+                    }
+
+                }
 
 
             }
-            //if (folderBrowserDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            //{
 
-            //    saveDir = folderBrowserDialog1.SelectedPath;
-            //}
+            if (barcodeFile.Count() > 0)//File was populated
+            {
+                DialogResult result2 = MessageBox.Show("Do you want to save the barcode.txt file?",
+               "Save the file",
+               MessageBoxButtons.YesNo,
+               MessageBoxIcon.Question);
 
+                if (result2 == DialogResult.Yes)
+                {
+                    saveFileDialog1.FileName = "barcode";
+                    saveFileDialog1.DefaultExt = "txt";
+                    if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+                    {
+
+                        using (StreamWriter sw = new StreamWriter(saveFileDialog1.FileName))
+                        {
+                            sw.WriteLine("//barcode(*)" + '\t' + "chute(*)" + '\t' + "user action(*)" + '\t' + "tray angle");
+                            foreach (var item in barcodeFile)
+                            {
+                                sw.WriteLine(item);
+                            }
+                            sw.Flush();
+                            sw.Close();
+
+                        }
+
+
+
+
+                    }
+
+                }
+
+            }
         }
     }
 }
