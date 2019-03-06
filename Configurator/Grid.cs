@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -15,7 +16,8 @@ namespace Configurator
     public partial class Grid : Form
     {
         public string serverDirectory { get; set; }
-        
+
+
         public Grid(string dir)
         {
             this.serverDirectory = dir;
@@ -878,6 +880,71 @@ namespace Configurator
             else {
                 comboBox4.Enabled = false;
             }
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                //// Hide the form so that it does not appear in the screenshot
+                //this.Hide();
+                //// Set the bitmap object to the size of the screen
+                //bmpScreenshot = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height, PixelFormat.Format32bppArgb);
+                //// Create a graphics object from the bitmap
+                //gfxScreenshot = Graphics.FromImage(bmpScreenshot);
+                //// Take the screenshot from the upper left corner to the right bottom corner
+                //gfxScreenshot.CopyFromScreen(Screen.PrimaryScreen.Bounds.X, Screen.PrimaryScreen.Bounds.Y, 0, 0, Screen.PrimaryScreen.Bounds.Size, CopyPixelOperation.SourceCopy);
+                //// Save the screenshot to the specified path that the user has chosen
+                //bmpScreenshot.Save(saveFileDialog1.FileName, ImageFormat.Png);
+                //// Show the form again
+                //this.Show();
+
+                //var frm = Form.ActiveForm;
+                var frm = panel2;
+                using (var bmp = new Bitmap(frm.Width, frm.Height))
+                {
+                    frm.DrawToBitmap(bmp, new Rectangle(0, 0, bmp.Width, bmp.Height));
+                    bmp.Save(saveFileDialog1.FileName, ImageFormat.Png);
+                }
+
+            }
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            var filePath = string.Empty;
+            List<string> barcodesData = new List<string>(); 
+            string[] gridPhi = System.IO.File.ReadAllLines(serverDirectory + "\\grid.physical");
+            List<string> locations = new List<string>();
+            List<string> barcodeFile = new List<string>();
+
+
+            foreach (var item in gridPhi)
+            {
+                var newstring = item.Split('\t');
+                if (newstring.Length >1)
+                {
+                    locations.Add(newstring[0]);
+                }
+            }
+            if (openFileDialog1.ShowDialog()==DialogResult.OK)
+            {
+                filePath = openFileDialog1.FileName;
+                barcodesData = System.IO.File.ReadAllLines(filePath).ToList();
+            }
+
+            if (barcodesData.Count()>0)
+            {
+
+
+
+            }
+            //if (folderBrowserDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            //{
+
+            //    saveDir = folderBrowserDialog1.SelectedPath;
+            //}
+
         }
     }
 }
