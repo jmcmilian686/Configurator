@@ -41,15 +41,19 @@ namespace Configurator
 
         public int robots { get; set; }
 
+        public int mousePX = 0;
+
+        public int mousePY = 0;
 
         public List<GridMatrix> matrix { get; set; }
+
         public Server(string dir)
         {
             this.serverDirectory = dir;
             InitializeComponent();
         }
 
-
+        
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -81,6 +85,7 @@ namespace Configurator
         {
             btnH = 20;
             btnW = 20;
+           
             //induction = 0;
             //parking = 0;
             //enterindqueue = 0;
@@ -548,6 +553,48 @@ namespace Configurator
             btnH = trackBar1.Value;
             btnW = trackBar1.Value;
             panel2.Refresh();
+        }
+
+        private void panel2_MouseMove(object sender, MouseEventArgs e)
+        {
+
+            mousePX = e.X;
+            mousePY = e.Y;
+            int gridPX = e.X/ btnW;
+            int gridPY = e.Y/ btnH;
+            string nodeType = "Block";
+
+            label23.Text = "X: "+mousePX.ToString()+";"+"Y: "+ mousePY.ToString();
+
+
+            System.Drawing.Point mousePosition = new Point(mousePX, mousePY);
+
+            ////finding node type
+            //var node = matrix.Where(p => p.PosX == gridPX && p.PosY == gridPY).FirstOrDefault();
+
+            //if (node!=null)
+            //{
+            //    nodeType = "something";
+            //}
+
+            IWin32Window win = this;
+            mousePosition.X += 90;
+
+            toolTip1.Show(nodeType + " X:" + gridPX.ToString() + "Y:" + gridPY.ToString(), win, mousePosition, 1000);
+        }
+
+        private void panel2_MouseHover(object sender, EventArgs e)
+        {
+            //System.Drawing.Point mousePosition = new Point(mousePX,mousePY);
+            
+
+           
+
+            //    IWin32Window win = this;
+            //    mousePosition.X += 90;
+
+            //    toolTip1.Show("Tooltip " + "X:" + mousePosition.X / btnW + "Y:" + mousePosition.Y / btnH, win, mousePosition, 1000);
+           
         }
     }
 }
