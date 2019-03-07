@@ -1,7 +1,6 @@
 C:\Users\moraljo1\source\repos\Configurator\Configurator\bin\Debug\Configurator.exe.config
 C:\Users\moraljo1\source\repos\Configurator\Configurator\bin\Debug\Configurator.exe
 C:\Users\moraljo1\source\repos\Configurator\Configurator\bin\Debug\Configurator.pdb
-C:\Users\moraljo1\source\repos\Configurator\Configurator\obj\Debug\Configurator.csprojResolveAssemblyReference.cache
 C:\Users\moraljo1\source\repos\Configurator\Configurator\obj\Debug\Configurator.Configurator.resources
 C:\Users\moraljo1\source\repos\Configurator\Configurator\obj\Debug\Configurator.Properties.Resources.resources
 C:\Users\moraljo1\source\repos\Configurator\Configurator\obj\Debug\Configurator.csproj.GenerateResource.Cache
@@ -74,3 +73,6 @@ C:\Users\moraljo1\source\repos\ConfiguratorV2\Configurator\obj\Debug\Configurato
 C:\Users\moraljo1\source\repos\ConfiguratorV2\Configurator\obj\Debug\Configurator.csproj.CopyComplete
 C:\Users\moraljo1\source\repos\ConfiguratorV2\Configurator\obj\Debug\Configurator.exe
 C:\Users\moraljo1\source\repos\ConfiguratorV2\Configurator\obj\Debug\Configurator.pdb
+C:\Users\moraljo1\source\repos\Configurator\Configurator\obj\Debug\Configurator.csprojAssemblyReference.cache
+C:\Users\moraljo1\source\repos\Configurator\Configurator\obj\Debug\Configurator.NewMapGrid.resources
+C:\Users\moraljo1\source\repos\Configurator\Configurator\obj\Debug\Configurator.csproj.CopyComplete
