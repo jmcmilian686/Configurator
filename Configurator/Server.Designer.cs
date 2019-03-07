@@ -37,7 +37,6 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label18 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
@@ -57,10 +56,14 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
+            this.trackBar1 = new System.Windows.Forms.TrackBar();
+            this.label3 = new System.Windows.Forms.Label();
+            this.panel3 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
-            this.panel3.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
+            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -87,6 +90,8 @@
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.label3);
+            this.panel1.Controls.Add(this.trackBar1);
             this.panel1.Controls.Add(this.button4);
             this.panel1.Controls.Add(this.label22);
             this.panel1.Controls.Add(this.button2);
@@ -96,7 +101,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(218, 682);
+            this.panel1.Size = new System.Drawing.Size(218, 671);
             this.panel1.TabIndex = 6;
             // 
             // button4
@@ -105,7 +110,7 @@
             this.button4.Image = global::Configurator.Properties.Resources.grid;
             this.button4.Location = new System.Drawing.Point(-3, 382);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(216, 128);
+            this.button4.Size = new System.Drawing.Size(220, 128);
             this.button4.TabIndex = 6;
             this.button4.UseVisualStyleBackColor = false;
             this.button4.Visible = false;
@@ -148,29 +153,15 @@
             // panel2
             // 
             this.panel2.AutoScroll = true;
-            this.panel2.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.panel2.AutoSize = true;
+            this.panel2.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.panel2.Controls.Add(this.panel3);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(218, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(964, 682);
-            this.panel2.TabIndex = 7;
+            this.panel2.Size = new System.Drawing.Size(1001, 671);
+            this.panel2.TabIndex = 1;
             this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
-            // 
-            // panel3
-            // 
-            this.panel3.BackColor = System.Drawing.SystemColors.Control;
-            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel3.Controls.Add(this.groupBox1);
-            this.panel3.Controls.Add(this.label21);
-            this.panel3.Controls.Add(this.label4);
-            this.panel3.Controls.Add(this.label20);
-            this.panel3.Controls.Add(this.label19);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel3.Location = new System.Drawing.Point(787, 0);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(177, 682);
-            this.panel3.TabIndex = 0;
             // 
             // groupBox1
             // 
@@ -378,11 +369,47 @@
             this.label19.TabIndex = 14;
             this.label19.Text = "Recom. Robots :";
             // 
+            // trackBar1
+            // 
+            this.trackBar1.Location = new System.Drawing.Point(23, 567);
+            this.trackBar1.Maximum = 40;
+            this.trackBar1.Minimum = 8;
+            this.trackBar1.Name = "trackBar1";
+            this.trackBar1.Size = new System.Drawing.Size(175, 45);
+            this.trackBar1.SmallChange = 5;
+            this.trackBar1.TabIndex = 8;
+            this.trackBar1.Value = 20;
+            this.trackBar1.ValueChanged += new System.EventHandler(this.trackBar1_ValueChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(78, 551);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(59, 13);
+            this.label3.TabIndex = 9;
+            this.label3.Text = "Grid Zoom.";
+            // 
+            // panel3
+            // 
+            this.panel3.BackColor = System.Drawing.SystemColors.Control;
+            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel3.Controls.Add(this.groupBox1);
+            this.panel3.Controls.Add(this.label21);
+            this.panel3.Controls.Add(this.label4);
+            this.panel3.Controls.Add(this.label20);
+            this.panel3.Controls.Add(this.label19);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel3.Location = new System.Drawing.Point(824, 0);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(177, 671);
+            this.panel3.TabIndex = 0;
+            // 
             // Server
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1182, 682);
+            this.ClientSize = new System.Drawing.Size(1219, 671);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -395,11 +422,13 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -411,7 +440,6 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label17;
@@ -433,5 +461,8 @@
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TrackBar trackBar1;
+        private System.Windows.Forms.Panel panel3;
     }
 }
