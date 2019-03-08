@@ -11,5 +11,6 @@ namespace Configurator
         public string GridValue { get; set; }
         public int PosX{ get; set; }
         public int PosY { get; set; }
+        public int NodeType { get; set; }
     }
 }

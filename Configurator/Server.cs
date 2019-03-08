@@ -93,7 +93,7 @@ namespace Configurator
             //charging = 0;
             //working = 0;
             //chutes = 0;
-            //robots = 0;
+            robots = 0;
             
 
             if (serverDirectory != "")
@@ -120,13 +120,14 @@ namespace Configurator
 
                         string[] elems = line.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
-                        if (elems[2] == "12")
-                        {
+                        //if (elems[2] == "12")
+                        //{
                             GridMatrix node = new GridMatrix();
                             node.PosX = Convert.ToInt32(elems[0]);
                             node.PosY = Convert.ToInt32(elems[1]);
+                            node.NodeType = Convert.ToInt32(elems[2]);
                             matrix.Add(node);
-                        }
+                        //}
 
                     }
 
@@ -323,7 +324,7 @@ namespace Configurator
                     //        label16.Text = enterindqueue.ToString();
                     //        label18.Text = working.ToString();
                     //        label20.Text = (charging * 10).ToString();
-                    //        label21.Text = (robots - 1).ToString();
+                          label21.Text = (robots - 1).ToString();
 
                           
 
@@ -356,7 +357,7 @@ namespace Configurator
             charging = 0;
             working = 0;
             chutes = 0;
-            robots = 0;
+        
 
 
             if (serverDirectory != "")
@@ -533,7 +534,7 @@ namespace Configurator
                             label16.Text = enterindqueue.ToString();
                             label18.Text = working.ToString();
                             label20.Text = (charging * 10).ToString();
-                            label21.Text = (robots - 1).ToString();
+                    
 
 
 
@@ -570,12 +571,40 @@ namespace Configurator
             System.Drawing.Point mousePosition = new Point(mousePX, mousePY);
 
             ////finding node type
-            //var node = matrix.Where(p => p.PosX == gridPX && p.PosY == gridPY).FirstOrDefault();
+            var nodeT = matrix.Where(p => p.PosX == gridPX && p.PosY == gridPY).FirstOrDefault();
+
 
             //if (node!=null)
             //{
             //    nodeType = "something";
             //}
+            if (nodeT != null)
+            {
+                switch (nodeT.NodeType)
+                {
+                    case 12:
+                        nodeType = "Chute :"+ nodeT.GridValue;
+                        break;
+                    case 0:
+                        nodeType = "Empty :";
+                        break;
+                    case 1:
+                        nodeType = "Working Block :" + nodeT.GridValue;
+                        break;
+                    case 11:
+                        nodeType = "Parking :" + nodeT.GridValue;
+                        break;
+                    case 7:
+                        nodeType = "Induction Station:" + nodeT.GridValue;
+                        break;
+                    case 4:
+                        nodeType = "Charging Station:" + nodeT.GridValue;
+                        break;
+                    default:
+                        break;
+                }
+            }
+            
 
             IWin32Window win = this;
             mousePosition.X += 90;
