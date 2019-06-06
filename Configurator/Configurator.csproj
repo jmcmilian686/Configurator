@@ -138,6 +138,12 @@
     <Compile Include="Server.Designer.cs">
       <DependentUpon>Server.cs</DependentUpon>
     </Compile>
+    <Compile Include="TestGrid.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TestGrid.Designer.cs">
+      <DependentUpon>TestGrid.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="ConfFile.resx">
       <DependentUpon>ConfFile.cs</DependentUpon>
     </EmbeddedResource>
@@ -172,6 +178,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Server.resx">
       <DependentUpon>Server.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TestGrid.resx">
+      <DependentUpon>TestGrid.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\RobotList.ipAdd.datasource" />

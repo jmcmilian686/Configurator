@@ -21,6 +21,10 @@ namespace Configurator
 
         public int btnH { get; set; }
 
+        public int offsetX { get; set; }
+
+        public int offsetY { get; set; }
+
         public int induction { get; set; }
 
         public int working { get; set; }
@@ -85,7 +89,10 @@ namespace Configurator
         {
             btnH = 20;
             btnW = 20;
+            offsetX = 0;
+            offsetY = 0;
            
+            
             //induction = 0;
             //parking = 0;
             //enterindqueue = 0;
@@ -166,185 +173,40 @@ namespace Configurator
 
 
 
-                    //Point pos = new Point(1, 1);
-                    ////writing the button matrix
+                     label21.Text = (robots - 1).ToString();
 
-                    //Graphics g = panel2.CreateGraphics();
-
-                    //foreach (string line in linesGrid)
-                    //{
-                    //    string[] elems = line.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-
-                    //    if (elems[0] != "0" && elems[2] != "0")
-                    //    {
-
-
-                    //        //using GDI
-
-                          
-                    //        Pen blackPen = new Pen(Color.Black, 2);
-
-                    //        SolidBrush solidBrush = new SolidBrush(Color.White);
-                    //        int posX = Convert.ToInt32(elems[0]);
-                    //        int posY = Convert.ToInt32(elems[1]);
-
-                    //        switch (elems[2])
-                    //        {
-                    //            case "12":
-                    //               solidBrush.Color = Color.FromArgb(88, 142, 12);
-                    //               elements++;
-                                    
-                    //                Rectangle penRect = new Rectangle(posX*btnW, posY*btnH, btnH, btnW);
-                    //                g.DrawRectangle(blackPen, penRect);
-
-                                    
-                    //                chutes++;
-
-                    //                break;
-                    //            case "1":
-                                  
-                    //                Rectangle wRect = new Rectangle(posX, posY, btnH, btnW);
-                    //                g.DrawRectangle(blackPen, wRect);
-                    //                working++;
-                    //                break;
-                    //            case "11":
-                    //                Rectangle pRect = new Rectangle(posX, posY, btnH, btnW);
-                    //                g.DrawRectangle(blackPen, pRect);
-                    //                parking++;
-                    //                break;
-                    //            case "5":
-                    //                Rectangle fivRect = new Rectangle(posX, posY, btnH, btnW);
-                    //                g.DrawRectangle(blackPen, fivRect);
-
-                    //                break;
-                    //            case "7":
-                    //                Rectangle indRect = new Rectangle(posX, posY, btnH, btnW);
-                    //                g.DrawRectangle(blackPen, indRect);
-                    //                induction++;
-                    //                break;
-                    //            case "2":
-                    //                Rectangle inqRect = new Rectangle(posX, posY, btnH, btnW);
-                    //                g.DrawRectangle(blackPen, inqRect);
-                    //                indqueue++;
-                    //                break;
-                    //            case "10":
-                    //                Rectangle entiRect = new Rectangle(posX, posY, btnH, btnW);
-                    //                g.DrawRectangle(blackPen, entiRect);
-                    //                enterindqueue++;
-                    //                break;
-                    //            case "4":
-                    //                Rectangle chRect = new Rectangle(posX, posY, btnH, btnW);
-                    //                g.DrawRectangle(blackPen, chRect);
-                    //                charging++;
-                    //                break;
-                    //            default:
-                    //                break;
-                    //        }
-
-
-
-
-
-
-                    //        //Using Controls
-
-
-
-                    //        //PictureBox btn = new PictureBox();
-                    //        //Point newpos = new Point();
-                    //        //newpos.X = Convert.ToInt32(elems[0]) * btnW;
-                    //        //newpos.Y = Convert.ToInt32(elems[1]) * btnH;
-                    //        //btn.Location = newpos;
-                    //        //btn.Height = btnH;
-                    //        //btn.Width = btnW;
-                    //        //btn.Enabled = false;
-                    //        //btn.ForeColor = Color.Black;
-                    //        //btn.BorderStyle = BorderStyle.FixedSingle;
-
-                    //        //ToolTip ToolTip1 = new ToolTip();
-                    //        //ToolTip1.SetToolTip(btn, (newpos.X / btnW).ToString() + "-" + (newpos.Y / btnH).ToString());
-
-                    //        //switch (elems[2])
-                    //        //{
-                    //        //    case "12":
-                    //        //        btn.BackColor = Color.FromArgb(88, 142, 12);
-                    //        //        btn.Enabled = true;
-
-                    //        //        elements++;
-
-                    //        //        int posX = Convert.ToInt32(elems[0]);
-                    //        //        int posY = Convert.ToInt32(elems[1]);
-                    //        //        GridMatrix node = matrix.Where(p => p.PosX == posX && p.PosY == posY).FirstOrDefault();
-                    //        //        if (node != null)
-                    //        //        {
-                    //        //            btn.Text = node.GridValue;
-                    //        //        }
-                    //        //        chutes++;
-
-                    //        //        break;
-                    //        //    case "1":
-                    //        //        btn.BackColor = Color.FromArgb(252, 240, 5);
-                    //        //        working++;
-                    //        //        break;
-                    //        //    case "11":
-                    //        //        btn.BackColor = Color.FromArgb(255, 255, 255);
-                    //        //        parking++;
-                    //        //        break;
-                    //        //    case "5":
-                    //        //        btn.BackColor = Color.FromArgb(242, 109, 96);
-
-                    //        //        break;
-                    //        //    case "7":
-                    //        //        btn.BackColor = Color.FromArgb(34, 201, 56);
-                    //        //        induction++;
-                    //        //        break;
-                    //        //    case "2":
-                    //        //        btn.BackColor = Color.FromArgb(202, 116, 237);
-                    //        //        indqueue++;
-                    //        //        break;
-                    //        //    case "10":
-                    //        //        btn.BackColor = Color.FromArgb(0, 255, 225);
-                    //        //        enterindqueue++;
-                    //        //        break;
-                    //        //    case "4":
-                    //        //        btn.BackColor = Color.FromArgb(255, 114, 0);
-                    //        //        charging++;
-                    //        //        break;
-                    //        //    default:
-                    //        //        break;
-                    //        //}
-
-                    //        //panel2.Controls.Add(btn);
-
-                    //        label11.Text = induction.ToString();
-                    //        label12.Text = charging.ToString();
-                    //        label13.Text = parking.ToString();
-                    //        label14.Text = chutes.ToString();
-                    //        label15.Text = indqueue.ToString();
-                    //        label16.Text = enterindqueue.ToString();
-                    //        label18.Text = working.ToString();
-                    //        label20.Text = (charging * 10).ToString();
-                          label21.Text = (robots - 1).ToString();
-
-                          
-
-                    //    }
-
-                    //}
-
-                    //g.Dispose();
                 }
 
-               
+                int offsetH = ((matrix.Last().PosX * btnW)- panel2.Width) / btnH;
+                int offsetV = ((matrix.Last().PosY * btnH) - panel2.Height) / btnW;
+
+                if (offsetH >0)
+                {
+                    hScrollBar1.Minimum = 0;
+                    hScrollBar1.Maximum = offsetH +2;
+                    hScrollBar1.SmallChange = 1;
+                    hScrollBar1.LargeChange = 3;
+                    hScrollBar1.Visible = true;
+                }
+
+                if (offsetV >0)
+                {
+                    vScrollBar1.Minimum = 0;
+                    vScrollBar1.Maximum = offsetV +2;
+                    vScrollBar1.SmallChange = 1;
+                    vScrollBar1.LargeChange = 3;
+                    vScrollBar1.Visible = true;
+                }
             }
         }
 
         
         private void button4_Click_1(object sender, EventArgs e)
         {
-            Grid grid = new Grid(serverDirectory);
+            //Grid grid = new Grid(serverDirectory);
+            TestGrid testgrid = new TestGrid(serverDirectory);
 
-            grid.Show();
+            testgrid.Show();
         }
 
         private void panel2_Paint(object sender, PaintEventArgs e)
@@ -357,8 +219,10 @@ namespace Configurator
             charging = 0;
             working = 0;
             chutes = 0;
-        
 
+
+
+            
 
             if (serverDirectory != "")
             {
@@ -388,7 +252,8 @@ namespace Configurator
                     Point pos = new Point(1, 1);
                     //writing the button matrix
 
-                    Graphics g = panel2.CreateGraphics();
+
+                  Graphics g = panel2.CreateGraphics();
 
                     foreach (string line in linesGrid)
                     {
@@ -413,11 +278,11 @@ namespace Configurator
                                     
                                     elements++;
 
-                                    Rectangle penRect = new Rectangle(posX * btnW, posY * btnH, btnH, btnW);
+                                    Rectangle penRect = new Rectangle(posX * btnW - offsetX, posY * btnH - offsetY, btnH, btnW);
                                     g.DrawRectangle(blackPen, penRect);
 
                                     //Filling Rectangle
-                                    Rectangle rect2 = new Rectangle(posX * btnW + 2, posY * btnH + 2, btnH - 2, btnW - 2);
+                                    Rectangle rect2 = new Rectangle((posX * btnW + 2) - offsetX, (posY * btnH + 2) - offsetY, btnH - 2, btnW - 2);
                                     solidBrush.Color = Color.FromArgb(100, 100, 0);
                                     g.FillRectangle(solidBrush, rect2);
 
@@ -426,100 +291,100 @@ namespace Configurator
                                     break;
                                 case "1":
 
-                                    Rectangle wRect = new Rectangle(posX * btnW, posY * btnH, btnH, btnW);
+                                    Rectangle wRect = new Rectangle(posX * btnW - offsetX, posY * btnH - offsetY, btnH, btnW);
                                     g.DrawRectangle(blackPen, wRect);
 
                                     //Filling Rectangle
-                                    Rectangle rectwF = new Rectangle(posX * btnW + 2, posY * btnH + 2, btnH - 2, btnW - 2);
+                                    Rectangle rectwF = new Rectangle((posX * btnW + 2) - offsetX, (posY * btnH + 2) - offsetY, btnH - 2, btnW - 2);
                                     solidBrush.Color = Color.FromArgb(255, 255, 130);
                                     g.FillRectangle(solidBrush, rectwF);
                                     working++;
                                     break;
                                 case "11":
-                                    Rectangle pRect = new Rectangle(posX * btnW, posY * btnH, btnH, btnW);
+                                    Rectangle pRect = new Rectangle(posX * btnW - offsetX, posY * btnH - offsetY, btnH, btnW);
                                     g.DrawRectangle(blackPen, pRect);
 
                                     //Filling Rectangle
-                                    Rectangle rectpF = new Rectangle(posX * btnW + 2, posY * btnH + 2, btnH - 2, btnW - 2);
+                                    Rectangle rectpF = new Rectangle((posX * btnW + 2) - offsetX, (posY * btnH + 2) - offsetY, btnH - 2, btnW - 2);
                                     solidBrush.Color = Color.FromArgb(255, 255, 255);
                                     g.FillRectangle(solidBrush, rectpF);
                                     parking++;
                                     break;
                                 case "5":
-                                    Rectangle fivRect = new Rectangle(posX * btnW, posY * btnH, btnH, btnW);
+                                    Rectangle fivRect = new Rectangle(posX * btnW - offsetX, posY * btnH - offsetY, btnH, btnW);
                                     g.DrawRectangle(blackPen, fivRect);
 
                                     //Filling Rectangle
-                                    Rectangle rectfF = new Rectangle(posX * btnW + 2, posY * btnH + 2, btnH - 2, btnW - 2);
+                                    Rectangle rectfF = new Rectangle((posX * btnW + 2) - offsetX, (posY * btnH + 2) - offsetY, btnH - 2, btnW - 2);
                                     solidBrush.Color = Color.FromArgb(242, 109, 96);
                                     g.FillRectangle(solidBrush, rectfF);
 
                                     break;
                                 case "7":
-                                    Rectangle indRect = new Rectangle(posX * btnW, posY * btnH, btnH, btnW);
+                                    Rectangle indRect = new Rectangle(posX * btnW - offsetX, posY * btnH - offsetY, btnH, btnW);
                                     g.DrawRectangle(blackPen, indRect);
 
                                     //Filling Rectangle
-                                    Rectangle rectinF = new Rectangle(posX * btnW + 2, posY * btnH + 2, btnH - 2, btnW - 2);
+                                    Rectangle rectinF = new Rectangle((posX * btnW + 2) - offsetX, (posY * btnH + 2) - offsetY, btnH - 2, btnW - 2);
                                     solidBrush.Color = Color.FromArgb(150, 255, 150);
                                     g.FillRectangle(solidBrush, rectinF);
                                     induction++;
                                     break;
                                 case "2":
-                                    Rectangle inqRect = new Rectangle(posX * btnW, posY * btnH, btnH, btnW);
+                                    Rectangle inqRect = new Rectangle(posX * btnW - offsetX, posY * btnH - offsetY, btnH, btnW);
                                     g.DrawRectangle(blackPen, inqRect);
 
                                     //Filling Rectangle
-                                    Rectangle rectinqF = new Rectangle(posX * btnW + 2, posY * btnH + 2, btnH - 2, btnW - 2);
+                                    Rectangle rectinqF = new Rectangle((posX * btnW + 2) - offsetX, (posY * btnH + 2) - offsetY, btnH - 2, btnW - 2);
                                     solidBrush.Color = Color.FromArgb(202, 116, 237);
                                     g.FillRectangle(solidBrush, rectinqF);
                                     indqueue++;
                                     break;
                                 case "10":
-                                    Rectangle entiRect = new Rectangle(posX * btnW, posY * btnH, btnH, btnW);
+                                    Rectangle entiRect = new Rectangle(posX * btnW - offsetX, posY * btnH - offsetY, btnH, btnW);
                                     g.DrawRectangle(blackPen, entiRect);
 
                                     //Filling Rectangle
-                                    Rectangle rectEinqF = new Rectangle(posX * btnW + 2, posY * btnH + 2, btnH - 2, btnW - 2);
+                                    Rectangle rectEinqF = new Rectangle((posX * btnW + 2) - offsetX, (posY * btnH + 2) - offsetY, btnH - 2, btnW - 2);
                                     solidBrush.Color = Color.FromArgb(31, 226, 226);
                                     g.FillRectangle(solidBrush, rectEinqF);
                                     enterindqueue++;
                                     break;
                                 case "4":
-                                    Rectangle chRect = new Rectangle(posX * btnW, posY * btnH, btnH, btnW);
+                                    Rectangle chRect = new Rectangle(posX * btnW - offsetX, posY * btnH - offsetY, btnH, btnW);
                                     g.DrawRectangle(blackPen, chRect);
 
                                     //Filling Rectangle
-                                    Rectangle rectchF = new Rectangle(posX * btnW + 2, posY * btnH + 2, btnH - 2, btnW - 2);
+                                    Rectangle rectchF = new Rectangle((posX * btnW + 2) - offsetX, (posY * btnH + 2) - offsetY, btnH - 2, btnW - 2);
                                     solidBrush.Color = Color.FromArgb(255, 128, 0);
                                     g.FillRectangle(solidBrush, rectchF);
                                     charging++;
                                     break;
 
                                 case "15":
-                                    Rectangle echRect = new Rectangle(posX * btnW, posY * btnH, btnH, btnW);
+                                    Rectangle echRect = new Rectangle(posX * btnW - offsetX, posY * btnH - offsetY, btnH, btnW);
                                     g.DrawRectangle(blackPen, echRect);
 
                                     //Filling Rectangle
-                                    Rectangle rectechF = new Rectangle(posX * btnW + 2, posY * btnH + 2, btnH - 2, btnW - 2);
+                                    Rectangle rectechF = new Rectangle((posX * btnW + 2) - offsetX, (posY * btnH + 2) - offsetY, btnH - 2, btnW - 2);
                                     solidBrush.Color = Color.FromArgb(255, 160, 66);
                                     g.FillRectangle(solidBrush, rectechF);
                                     
                                     break;
 
                                 case "13":
-                                    Rectangle hRect = new Rectangle(posX * btnW, posY * btnH, btnH, btnW);
+                                    Rectangle hRect = new Rectangle(posX * btnW - offsetX, posY * btnH - offsetY, btnH, btnW);
                                     g.DrawRectangle(blackPen, hRect);
 
                                     //Filling Rectangle
-                                    Rectangle recthF = new Rectangle(posX * btnW + 2, posY * btnH + 2, btnH - 2, btnW - 2);
+                                    Rectangle recthF = new Rectangle((posX * btnW + 2) - offsetX, (posY * btnH + 2) - offsetY, btnH - 2, btnW - 2);
                                     solidBrush.Color = Color.FromArgb(255, 100, 255);
                                     g.FillRectangle(solidBrush, recthF);
 
                                     break;
                                 default:
 
-                                    Rectangle defRect = new Rectangle(posX * btnW, posY * btnH, btnH, btnW);
+                                    Rectangle defRect = new Rectangle(posX * btnW - offsetX, posY * btnH - offsetY, btnH, btnW);
                                     g.DrawRectangle(blackPen, defRect);
 
                                     break;
@@ -553,16 +418,36 @@ namespace Configurator
         {
             btnH = trackBar1.Value;
             btnW = trackBar1.Value;
+            int offsetH = ((matrix.Last().PosX * btnW) - panel2.Width) / btnH;
+            int offsetV = ((matrix.Last().PosY * btnH) - panel2.Height) / btnW;
+
+            if (offsetH > 0)
+            {
+                hScrollBar1.Minimum = 0;
+                hScrollBar1.Maximum = offsetH +2;
+                hScrollBar1.SmallChange = 1;
+                hScrollBar1.LargeChange = 3;
+                hScrollBar1.Visible = true;
+            }
+
+            if (offsetV > 0)
+            {
+                vScrollBar1.Minimum = 0;
+                vScrollBar1.Maximum = offsetV +2;
+                vScrollBar1.SmallChange = 1;
+                vScrollBar1.LargeChange = 3;
+                vScrollBar1.Visible = true;
+            }
             panel2.Refresh();
         }
 
         private void panel2_MouseMove(object sender, MouseEventArgs e)
         {
 
-            mousePX = e.X;
-            mousePY = e.Y;
-            int gridPX = e.X/ btnW;
-            int gridPY = e.Y/ btnH;
+            mousePX = offsetX>0?e.X+offsetX:e.X;
+            mousePY = offsetY>0?e.Y+offsetY:e.Y;
+            int gridPX = mousePX / btnW;
+            int gridPY = mousePY / btnH;
             string nodeType = "Block";
 
             label23.Text = "X: "+mousePX.ToString()+";"+"Y: "+ mousePY.ToString();
@@ -624,6 +509,34 @@ namespace Configurator
 
             //    toolTip1.Show("Tooltip " + "X:" + mousePosition.X / btnW + "Y:" + mousePosition.Y / btnH, win, mousePosition, 1000);
            
+        }
+
+       
+
+        private void panel2_MouseClick(object sender, MouseEventArgs e)
+        {
+            int myX = e.X;
+            int myY = e.Y;
+
+            label24.Text = "Click Coordinates:" + myX.ToString() + "X;" + myY.ToString() + "Y;";
+        }
+
+
+        private void vScrollBar1_ValueChanged(object sender, EventArgs e)
+        {
+            offsetY = vScrollBar1.Value * btnH;
+            panel2.Refresh();
+        }
+
+        private void hScrollBar1_ValueChanged(object sender, EventArgs e)
+        {
+            offsetX = hScrollBar1.Value * btnW;
+            panel2.Refresh();
+        }
+
+        private void trackBar1_Scroll(object sender, EventArgs e)
+        {
+
         }
     }
 }

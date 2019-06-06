@@ -76,3 +76,4 @@ C:\Users\moraljo1\source\repos\ConfiguratorV2\Configurator\obj\Debug\Configurato
 C:\Users\moraljo1\source\repos\Configurator\Configurator\obj\Debug\Configurator.csprojAssemblyReference.cache
 C:\Users\moraljo1\source\repos\Configurator\Configurator\obj\Debug\Configurator.NewMapGrid.resources
 C:\Users\moraljo1\source\repos\Configurator\Configurator\obj\Debug\Configurator.csproj.CopyComplete
+C:\Users\moraljo1\source\repos\Configurator\Configurator\obj\Debug\Configurator.TestGrid.resources

@@ -12,5 +12,8 @@ namespace Configurator
         public int PosX{ get; set; }
         public int PosY { get; set; }
         public int NodeType { get; set; }
+        public string RFID { get; set; }
+        public int Dir { get; set; }
+
     }
 }

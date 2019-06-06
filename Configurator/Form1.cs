@@ -166,9 +166,10 @@ namespace Configurator
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Grid grid = new Grid(gridDir);
+            //Grid grid = new Grid(serverDirectory);
+            TestGrid testgrid = new TestGrid(gridDir);
 
-            grid.Show();
+            testgrid.Show();
         }
 
         private void button2_Click(object sender, EventArgs e)

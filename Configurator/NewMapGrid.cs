@@ -38,7 +38,7 @@ namespace Configurator
                
                 //==establish the value lenght
 
-                int charLenght = Convert.ToInt32(textBox4.Text);
+                int charLenght = Convert.ToInt32(textBox4.Text)-1;
                 for (int i = 0; i < height; i++)
                 {
                     //string gridline = "";
