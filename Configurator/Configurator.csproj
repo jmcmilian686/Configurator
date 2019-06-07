@@ -69,6 +69,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ComboImage.cs" />
     <Compile Include="ConfFile.cs">
       <SubType>Form</SubType>
     </Compile>

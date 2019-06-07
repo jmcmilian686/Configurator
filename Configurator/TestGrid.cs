@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Drawing.Text;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -62,6 +64,8 @@ namespace Configurator
 
         public BitmaskEnum newMask;
 
+        public int selectedBlock;
+
         [Flags]
         public enum BitmaskEnum
         {
@@ -75,7 +79,28 @@ namespace Configurator
             DoEnt = 32,
             DoLv= 16
         }
+             
 
+       
+        Dictionary<Color, string> colorDict = new Dictionary<Color, string>()
+        {
+            {Color.FromArgb(242,242,242),"Empty"},
+            {Color.FromArgb(255, 255, 130),"WorkingBlock" },
+            {Color.FromArgb(200, 200, 255),"InductionQueue"},
+            {Color.FromArgb(100, 100, 255),"ReturnBlock"},
+            {Color.FromArgb(255, 128, 0),"ChargingStation"},
+            {Color.FromArgb(255, 160, 56),"EnterCharging"},
+            {Color.FromArgb(255, 202, 149),"QueueCharging"},
+            {Color.FromArgb(150, 255, 150),"Induction"},
+            {Color.FromArgb(210, 200, 21),"DivertQueue"},
+            {Color.FromArgb(0, 200, 0),"EvenSpeed"},
+            {Color.FromArgb(31, 226, 226),"EnterQueue"},
+            {Color.FromArgb(255, 255, 255),"Parking"},
+            {Color.FromArgb(100, 100, 0),"Chute"},
+            {Color.FromArgb(255, 100, 255),"Hospital"},
+            
+
+        };
         private void Mouse_Over(Object s, EventArgs e)
         {
 
@@ -94,7 +119,9 @@ namespace Configurator
             offsetY = 0;
             prevNode = new GridMatrix();
 
-           
+            comboBox5.DisplayColorSamples(colorDict);
+            comboBox5.SelectedIndex = 0;
+            selectedBlock = 0;
             
             //label12.Text = enumerat.ToString();
 
@@ -147,6 +174,10 @@ namespace Configurator
                     {
 
                         string[] elems = line.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                        if (elems.Count() == 1)
+                        {
+                            elems = line.Split('\t');
+                        }
 
                         string rfidLine = gridMap[Convert.ToInt32(elems[1])];
                         string[] rfids = rfidLine.Count() > 0 ? rfidLine.Split(',') : new string[] {""} ;
@@ -307,6 +338,155 @@ namespace Configurator
 
                 switch (item.NodeType.ToString())
                 {
+
+                    case "1":
+
+                        Rectangle wRect = new Rectangle(posX * btnW - offsetX, posY * btnH - offsetY, btnH, btnW);
+                        g.DrawRectangle(blackPen, wRect);
+
+                        //Filling Rectangle
+                        Rectangle rectwF = new Rectangle((posX * btnW + 1) - offsetX, (posY * btnH + 1) - offsetY, btnH - 1, btnW - 1);
+                        solidBrush.Color = Color.FromArgb(255, 255, 130);
+                        g.FillRectangle(solidBrush, rectwF);
+
+                        //flow drawing
+                        BitmaskEnum enumerat = (BitmaskEnum)Convert.ToInt32(item.Dir);
+                        paintFlow(g, enumerat, posX, posY);
+
+                        working++;
+                        break;
+                    case "2":
+                        Rectangle inqRect = new Rectangle(posX * btnW - offsetX, posY * btnH - offsetY, btnH, btnW);
+                        g.DrawRectangle(blackPen, inqRect);
+
+                        //Filling Rectangle
+                        Rectangle rectinqF = new Rectangle((posX * btnW + 1) - offsetX, (posY * btnH + 1) - offsetY, btnH - 1, btnW - 1);
+                        solidBrush.Color = Color.FromArgb(202, 116, 237);
+                        g.FillRectangle(solidBrush, rectinqF);
+                        //flow drawing
+                        BitmaskEnum enumerat5 = (BitmaskEnum)Convert.ToInt32(item.Dir);
+                        paintFlow(g, enumerat5, posX, posY);
+                        indqueue++;
+                        break;
+                    case "3":
+                        Rectangle retRect = new Rectangle(posX * btnW - offsetX, posY * btnH - offsetY, btnH, btnW);
+                        g.DrawRectangle(blackPen, retRect);
+
+                        //Filling Rectangle
+                        Rectangle rectret = new Rectangle((posX * btnW + 1) - offsetX, (posY * btnH + 1) - offsetY, btnH - 1, btnW - 1);
+                        solidBrush.Color = Color.FromArgb(100, 100, 255);
+                        g.FillRectangle(solidBrush, rectret);
+                        //flow drawing
+                        BitmaskEnum enumerat23 = (BitmaskEnum)Convert.ToInt32(item.Dir);
+                        paintFlow(g, enumerat23, posX, posY);
+                        indqueue++;
+                        break;
+                    case "4":
+                        Rectangle chRect = new Rectangle(posX * btnW - offsetX, posY * btnH - offsetY, btnH, btnW);
+                        g.DrawRectangle(blackPen, chRect);
+
+                        //Filling Rectangle
+                        Rectangle rectchF = new Rectangle((posX * btnW + 1) - offsetX, (posY * btnH + 1) - offsetY, btnH - 1, btnW - 1);
+                        solidBrush.Color = Color.FromArgb(255, 128, 0);
+                        g.FillRectangle(solidBrush, rectchF);
+                        //flow drawing
+                        BitmaskEnum enumerat7 = (BitmaskEnum)Convert.ToInt32(item.Dir);
+                        paintFlow(g, enumerat7, posX, posY);
+                        charging++;
+                        break;
+                    case "5":
+                        Rectangle fivRect = new Rectangle(posX * btnW - offsetX, posY * btnH - offsetY, btnH, btnW);
+                        g.DrawRectangle(blackPen, fivRect);
+
+                        //Filling Rectangle
+                        Rectangle rectfF = new Rectangle((posX * btnW + 1) - offsetX, (posY * btnH + 1) - offsetY, btnH - 1, btnW - 1);
+                        solidBrush.Color = Color.FromArgb(242, 109, 96);
+                        g.FillRectangle(solidBrush, rectfF);
+                        //flow drawing
+                        BitmaskEnum enumerat3 = (BitmaskEnum)Convert.ToInt32(item.Dir);
+                        paintFlow(g, enumerat3, posX, posY);
+
+                        break;
+                    case "6":
+                        Rectangle queCRect = new Rectangle(posX * btnW - offsetX, posY * btnH - offsetY, btnH, btnW);
+                        g.DrawRectangle(blackPen, queCRect);
+
+                        //Filling Rectangle
+                        Rectangle rectQc = new Rectangle((posX * btnW + 1) - offsetX, (posY * btnH + 1) - offsetY, btnH - 1, btnW - 1);
+                        solidBrush.Color = Color.FromArgb(255, 202, 149);
+                        g.FillRectangle(solidBrush, rectQc);
+                        //flow drawing
+                        BitmaskEnum enumerat26 = (BitmaskEnum)Convert.ToInt32(item.Dir);
+                        paintFlow(g, enumerat26, posX, posY);
+
+                        break;
+                    case "7":
+                        Rectangle indRect = new Rectangle(posX * btnW - offsetX, posY * btnH - offsetY, btnH, btnW);
+                        g.DrawRectangle(blackPen, indRect);
+
+                        //Filling Rectangle
+                        Rectangle rectinF = new Rectangle((posX * btnW + 1) - offsetX, (posY * btnH + 1) - offsetY, btnH - 1, btnW - 1);
+                        solidBrush.Color = Color.FromArgb(150, 255, 150);
+                        g.FillRectangle(solidBrush, rectinF);
+                        //flow drawing
+                        BitmaskEnum enumerat4 = (BitmaskEnum)Convert.ToInt32(item.Dir);
+                        paintFlow(g, enumerat4, posX, posY);
+                        induction++;
+                        break;
+                    case "8":
+                        Rectangle divQRect = new Rectangle(posX * btnW - offsetX, posY * btnH - offsetY, btnH, btnW);
+                        g.DrawRectangle(blackPen, divQRect);
+
+                        //Filling Rectangle
+                        Rectangle rectDQ = new Rectangle((posX * btnW + 1) - offsetX, (posY * btnH + 1) - offsetY, btnH - 1, btnW - 1);
+                        solidBrush.Color = Color.FromArgb(210, 200, 21);
+                        g.FillRectangle(solidBrush, rectDQ);
+                        //flow drawing
+                        BitmaskEnum enumerat28 = (BitmaskEnum)Convert.ToInt32(item.Dir);
+                        paintFlow(g, enumerat28, posX, posY);
+                        induction++;
+                        break;
+                    case "9":
+                        Rectangle evenRect = new Rectangle(posX * btnW - offsetX, posY * btnH - offsetY, btnH, btnW);
+                        g.DrawRectangle(blackPen, evenRect);
+
+                        //Filling Rectangle
+                        Rectangle rectEv = new Rectangle((posX * btnW + 1) - offsetX, (posY * btnH + 1) - offsetY, btnH - 1, btnW - 1);
+                        solidBrush.Color = Color.FromArgb(0, 200, 0);
+                        g.FillRectangle(solidBrush, rectEv);
+                        //flow drawing
+                        BitmaskEnum enumerat29 = (BitmaskEnum)Convert.ToInt32(item.Dir);
+                        paintFlow(g, enumerat29, posX, posY);
+                        induction++;
+                        break;
+
+                    case "10":
+                        Rectangle entiRect = new Rectangle(posX * btnW - offsetX, posY * btnH - offsetY, btnH, btnW);
+                        g.DrawRectangle(blackPen, entiRect);
+
+                        //Filling Rectangle
+                        Rectangle rectEinqF = new Rectangle((posX * btnW + 1) - offsetX, (posY * btnH + 1) - offsetY, btnH - 1, btnW - 1);
+                        solidBrush.Color = Color.FromArgb(31, 226, 226);
+                        g.FillRectangle(solidBrush, rectEinqF);
+                        //flow drawing
+                        BitmaskEnum enumerat6 = (BitmaskEnum)Convert.ToInt32(item.Dir);
+                        paintFlow(g, enumerat6, posX, posY);
+                        enterindqueue++;
+                        break;
+
+                    case "11":
+                        Rectangle pRect = new Rectangle(posX * btnW - offsetX, posY * btnH - offsetY, btnH, btnW);
+                        g.DrawRectangle(blackPen, pRect);
+
+                        //Filling Rectangle
+                        Rectangle rectpF = new Rectangle((posX * btnW + 1) - offsetX, (posY * btnH + 1) - offsetY, btnH - 1, btnW - 1);
+                        solidBrush.Color = Color.FromArgb(255, 234, 255);
+                        g.FillRectangle(solidBrush, rectpF);
+                        //flow drawing
+                        BitmaskEnum enumerat2 = (BitmaskEnum)Convert.ToInt32(item.Dir);
+                        paintFlow(g, enumerat2, posX, posY);
+                        parking++;
+                        break;
                     case "12":
 
                         elements++;
@@ -327,114 +507,6 @@ namespace Configurator
                         chutes++;
 
                         break;
-                    case "1":
-
-                        Rectangle wRect = new Rectangle(posX * btnW - offsetX, posY * btnH - offsetY, btnH, btnW);
-                        g.DrawRectangle(blackPen, wRect);
-
-                        //Filling Rectangle
-                        Rectangle rectwF = new Rectangle((posX * btnW + 1) - offsetX, (posY * btnH + 1) - offsetY, btnH - 1, btnW - 1);
-                        solidBrush.Color = Color.FromArgb(255, 255, 130);
-                        g.FillRectangle(solidBrush, rectwF);
-
-                        //flow drawing
-                        BitmaskEnum enumerat = (BitmaskEnum)Convert.ToInt32(item.Dir);
-                        paintFlow(g, enumerat, posX, posY);
-                        
-                        working++;
-                        break;
-                    case "11":
-                        Rectangle pRect = new Rectangle(posX * btnW - offsetX, posY * btnH - offsetY, btnH, btnW);
-                        g.DrawRectangle(blackPen, pRect);
-
-                        //Filling Rectangle
-                        Rectangle rectpF = new Rectangle((posX * btnW + 1) - offsetX, (posY * btnH + 1) - offsetY, btnH - 1, btnW - 1);
-                        solidBrush.Color = Color.FromArgb(255, 234, 255);
-                        g.FillRectangle(solidBrush, rectpF);
-                        //flow drawing
-                        BitmaskEnum enumerat2 = (BitmaskEnum)Convert.ToInt32(item.Dir);
-                        paintFlow(g, enumerat2, posX, posY);
-                        parking++;
-                        break;
-                    case "5":
-                        Rectangle fivRect = new Rectangle(posX * btnW - offsetX, posY * btnH - offsetY, btnH, btnW);
-                        g.DrawRectangle(blackPen, fivRect);
-
-                        //Filling Rectangle
-                        Rectangle rectfF = new Rectangle((posX * btnW + 1) - offsetX, (posY * btnH + 1) - offsetY, btnH - 1, btnW - 1);
-                        solidBrush.Color = Color.FromArgb(242, 109, 96);
-                        g.FillRectangle(solidBrush, rectfF);
-                        //flow drawing
-                        BitmaskEnum enumerat3 = (BitmaskEnum)Convert.ToInt32(item.Dir);
-                        paintFlow(g, enumerat3, posX, posY);
-
-                        break;
-                    case "7":
-                        Rectangle indRect = new Rectangle(posX * btnW - offsetX, posY * btnH - offsetY, btnH, btnW);
-                        g.DrawRectangle(blackPen, indRect);
-
-                        //Filling Rectangle
-                        Rectangle rectinF = new Rectangle((posX * btnW + 1) - offsetX, (posY * btnH + 1) - offsetY, btnH - 1, btnW - 1);
-                        solidBrush.Color = Color.FromArgb(150, 255, 150);
-                        g.FillRectangle(solidBrush, rectinF);
-                        //flow drawing
-                        BitmaskEnum enumerat4 = (BitmaskEnum)Convert.ToInt32(item.Dir);
-                        paintFlow(g, enumerat4, posX, posY);
-                        induction++;
-                        break;
-                    case "2":
-                        Rectangle inqRect = new Rectangle(posX * btnW - offsetX, posY * btnH - offsetY, btnH, btnW);
-                        g.DrawRectangle(blackPen, inqRect);
-
-                        //Filling Rectangle
-                        Rectangle rectinqF = new Rectangle((posX * btnW + 1) - offsetX, (posY * btnH + 1) - offsetY, btnH - 1, btnW - 1);
-                        solidBrush.Color = Color.FromArgb(202, 116, 237);
-                        g.FillRectangle(solidBrush, rectinqF);
-                        //flow drawing
-                        BitmaskEnum enumerat5 = (BitmaskEnum)Convert.ToInt32(item.Dir);
-                        paintFlow(g, enumerat5, posX, posY);
-                        indqueue++;
-                        break;
-                    case "10":
-                        Rectangle entiRect = new Rectangle(posX * btnW - offsetX, posY * btnH - offsetY, btnH, btnW);
-                        g.DrawRectangle(blackPen, entiRect);
-
-                        //Filling Rectangle
-                        Rectangle rectEinqF = new Rectangle((posX * btnW + 1) - offsetX, (posY * btnH + 1) - offsetY, btnH - 1, btnW - 1);
-                        solidBrush.Color = Color.FromArgb(31, 226, 226);
-                        g.FillRectangle(solidBrush, rectEinqF);
-                        //flow drawing
-                        BitmaskEnum enumerat6 = (BitmaskEnum)Convert.ToInt32(item.Dir);
-                        paintFlow(g, enumerat6, posX, posY);
-                        enterindqueue++;
-                        break;
-                    case "4":
-                        Rectangle chRect = new Rectangle(posX * btnW - offsetX, posY * btnH - offsetY, btnH, btnW);
-                        g.DrawRectangle(blackPen, chRect);
-
-                        //Filling Rectangle
-                        Rectangle rectchF = new Rectangle((posX * btnW + 1) - offsetX, (posY * btnH + 1) - offsetY, btnH - 1, btnW - 1);
-                        solidBrush.Color = Color.FromArgb(255, 128, 0);
-                        g.FillRectangle(solidBrush, rectchF);
-                        //flow drawing
-                        BitmaskEnum enumerat7 = (BitmaskEnum)Convert.ToInt32(item.Dir);
-                        paintFlow(g, enumerat7, posX, posY);
-                        charging++;
-                        break;
-
-                    case "15":
-                        Rectangle echRect = new Rectangle(posX * btnW - offsetX, posY * btnH - offsetY, btnH, btnW);
-                        g.DrawRectangle(blackPen, echRect);
-
-                        //Filling Rectangle
-                        Rectangle rectechF = new Rectangle((posX * btnW + 1) - offsetX, (posY * btnH + 1) - offsetY, btnH - 1, btnW - 1);
-                        solidBrush.Color = Color.FromArgb(255, 160, 66);
-                        g.FillRectangle(solidBrush, rectechF);
-                        //flow drawing
-                        BitmaskEnum enumerat8 = (BitmaskEnum)Convert.ToInt32(item.Dir);
-                        paintFlow(g, enumerat8, posX, posY);
-
-                        break;
 
                     case "13":
                         Rectangle hRect = new Rectangle(posX * btnW - offsetX, posY * btnH - offsetY, btnH, btnW);
@@ -449,11 +521,28 @@ namespace Configurator
                         paintFlow(g, enumerat9, posX, posY);
 
                         break;
+                    case "15":
+                        Rectangle echRect = new Rectangle(posX * btnW - offsetX, posY * btnH - offsetY, btnH, btnW);
+                        g.DrawRectangle(blackPen, echRect);
+
+                        //Filling Rectangle
+                        Rectangle rectechF = new Rectangle((posX * btnW + 1) - offsetX, (posY * btnH + 1) - offsetY, btnH - 1, btnW - 1);
+                        solidBrush.Color = Color.FromArgb(255, 160, 66);
+                        g.FillRectangle(solidBrush, rectechF);
+                        //flow drawing
+                        BitmaskEnum enumerat8 = (BitmaskEnum)Convert.ToInt32(item.Dir);
+                        paintFlow(g, enumerat8, posX, posY);
+
+                        break;
+
+                    
                     default:
 
                         Rectangle defRect = new Rectangle(posX * btnW - offsetX, posY * btnH - offsetY, btnH, btnW);
                         g.DrawRectangle(blackPen, defRect);
-
+                        Rectangle recthFE = new Rectangle((posX * btnW + 1) - offsetX, (posY * btnH + 1) - offsetY, btnH - 1, btnW - 1);
+                        solidBrush.Color = Color.FromArgb(242, 242, 242);
+                        g.FillRectangle(solidBrush, recthFE);
                         break;
                 }
 
@@ -657,14 +746,38 @@ namespace Configurator
             //}
             if (nodeT != null)
             {
-                switch (nodeT.NodeType)
+                if (checkBox11.Checked)
                 {
-                    case 12:
-
-                        if (!checkBox2.Checked)
+                    if (nodeT != null)
+                    {
+                        if (selectedBlock == 0 || selectedBlock == 12)
                         {
-                              if (comboBox2.SelectedItem != null)
-                              {
+                            nodeT.Dir = 0;
+                            nodeT.NodeType = selectedBlock;
+
+                        }
+                        else
+                        {
+
+                            nodeT.Dir = (int)newMask;
+                            nodeT.NodeType = selectedBlock;
+
+                        }
+
+
+                        panel4.Refresh();
+                    }
+                }
+                else
+                {
+                    switch (nodeT.NodeType)
+                    {
+                        case 12:
+
+                            if (!checkBox2.Checked)
+                            {
+                                if (comboBox2.SelectedItem != null)
+                                {
                                     genCounter++;
                                     textBox1.Text = genCounter.ToString();
                                     if (checkBox1.Checked && comboBox4.SelectedItem != null)
@@ -679,49 +792,52 @@ namespace Configurator
                                     }
 
 
-                              }
+                                }
                                 matrix[indexT] = nodeT;
                                 prevNode = nodeT;
                                 panel4.Refresh();
-                           
-                        }
-                        else
-                        {
-                            nodeT.GridValue = textBox2.Text;
+
+                            }
+                            else
+                            {
+                                nodeT.GridValue = textBox2.Text;
+                                matrix[indexT] = nodeT;
+                                prevNode = nodeT;
+                                panel4.Refresh();
+                            }
+                            break;
+                        case 0:
+                            nodeType = "Empty :";
+                            break;
+                        case 1:
+                            nodeType = "Working Block :" + nodeT.GridValue;
+                            break;
+                        case 11:
+                            nodeType = "Parking :" + nodeT.GridValue;
+                            break;
+                        case 7:
+
+                            if (checkBox2.Checked)
+                            {
+                                nodeT.GridValue = textBox2.Text;
+                            }
+
                             matrix[indexT] = nodeT;
                             prevNode = nodeT;
                             panel4.Refresh();
-                        }
-                        break;
-                    case 0:
-                        nodeType = "Empty :";
-                        break;
-                    case 1:
-                        nodeType = "Working Block :" + nodeT.GridValue;
-                        break;
-                    case 11:
-                        nodeType = "Parking :" + nodeT.GridValue;
-                        break;
-                    case 7:
-
-                        if (checkBox2.Checked)
-                        {
-                            nodeT.GridValue = textBox2.Text;
-                        }
-
-                        matrix[indexT] = nodeT;
-                        prevNode = nodeT;
-                        panel4.Refresh();
-                        break;
-                    case 4:
-                        nodeType = "Charging Station:" + nodeT.GridValue;
-                        break;
-                    default:
-                        break;
+                            break;
+                        case 4:
+                            nodeType = "Charging Station:" + nodeT.GridValue;
+                            break;
+                        default:
+                            break;
+                    }
                 }
+                
 
                
             }
+            
         }
 
         private void CheckBox1_CheckedChanged(object sender, EventArgs e)
@@ -746,6 +862,7 @@ namespace Configurator
             int maxY = matrix.Last().PosY;
             string[] saveRfid = new string[maxY+1];
             string lineRfid = "";
+            string gridConfig = "";
             int counter = 0;
          
             int size = 0;
@@ -776,6 +893,8 @@ namespace Configurator
                     lineRfid = "";
                     lineRfid += gm.RFID + ",";
                 }
+
+                gridConfig +=" "+ gm.PosX +"   " + gm.PosY + "  " + gm.NodeType + "    " + gm.Dir + Environment.NewLine;
 
             }
 
@@ -824,6 +943,12 @@ namespace Configurator
                     if (File.Exists(newPathMap))
                     {
                         File.WriteAllLines(newPathMap, saveRfid);
+
+                    }
+                    string newPathconfig = serverDirectory + "\\grid.config";
+                    if (File.Exists(newPathconfig))
+                    {
+                        File.WriteAllText(newPathconfig, gridConfig);
 
                     }
 
@@ -904,24 +1029,34 @@ namespace Configurator
             }
             else
             {
-                if (checkBox11.Checked)
-                {
-                    int gridPX = mousePX / btnW;
-                    int gridPY = mousePY / btnH;
+                //if (checkBox11.Checked)
+                //{
+                //    int gridPX = mousePX / btnW;
+                //    int gridPY = mousePY / btnH;
 
-                    ////finding node type
-                    var nodeT = matrix.Where(p => p.PosX == gridPX && p.PosY == gridPY).FirstOrDefault();
-                    int indexT = matrix.IndexOf(nodeT);
-                    if (nodeT != null)
-                    {
-                        if (nodeT.NodeType!= 0)
-                        {
-                            nodeT.Dir = (int)newMask;
-                        }
+                //    ////finding node type
+                //    var nodeT = matrix.Where(p => p.PosX == gridPX && p.PosY == gridPY).FirstOrDefault();
+                //    int indexT = matrix.IndexOf(nodeT);
+                //    if (nodeT != null)
+                //    {
+                //        if (selectedBlock ==0||selectedBlock ==12)
+                //        {
+                //            nodeT.Dir = 0;
+                //            nodeT.NodeType = selectedBlock;
 
-                        panel4.Refresh();
-                    }
-                }
+                //        }
+                //        else
+                //        {
+                            
+                //                nodeT.Dir = (int)newMask;
+                //                nodeT.NodeType = selectedBlock;
+                           
+                //        }
+                        
+
+                //        panel4.Refresh();
+                //    }
+                //}
             }
         }
 
@@ -1007,6 +1142,102 @@ namespace Configurator
         private void CheckBox5_CheckedChanged(object sender, EventArgs e)
         {
             NewMaskCheck();
+        }
+
+        private void ComboBox5_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var valuIndex = (KeyValuePair<Color, string>)comboBox5.SelectedItem;
+
+            
+            Bitmap rectBuffer = new Bitmap(37, 37);
+            Pen blackPen = new Pen(Color.Gray, 1);
+            Graphics g = Graphics.FromImage(rectBuffer);
+            Rectangle penRect = new Rectangle(0, 0, 37, 37);
+            g.DrawRectangle(blackPen, penRect);
+            SolidBrush solidBrush = new SolidBrush(Color.Gray);
+            Rectangle rect3 = new Rectangle(1, 1, 37, 37);
+            switch (valuIndex.Value)
+            {
+                case "WorkingBlock":
+                    solidBrush.Color = Color.FromArgb(255, 255, 130);
+                    g.FillRectangle(solidBrush, rect3);
+                    selectedBlock = 1;
+                    break;
+                case "InductionQueue":
+                    solidBrush.Color = Color.FromArgb(200, 200, 255);
+                    g.FillRectangle(solidBrush, rect3);
+                    selectedBlock = 2;
+                    break;
+                case "ReturnBlock":
+                    solidBrush.Color = Color.FromArgb(100, 100, 255);
+                    g.FillRectangle(solidBrush, rect3);
+                    selectedBlock = 3;
+                    break;
+                case "ChargingStation":
+                    solidBrush.Color = Color.FromArgb(255, 128, 0);
+                    g.FillRectangle(solidBrush, rect3);
+                    selectedBlock = 4;
+                    break;
+                case "EnterCharging":
+                    solidBrush.Color = Color.FromArgb(255, 160, 56);
+                    g.FillRectangle(solidBrush, rect3);
+                    selectedBlock = 5;
+                    break;
+                case "QueueCharging":
+                    solidBrush.Color = Color.FromArgb(255, 202, 149);
+                    g.FillRectangle(solidBrush, rect3);
+                    selectedBlock = 6;
+                    break;
+                case "Induction":
+                    solidBrush.Color = Color.FromArgb(150, 255, 150);
+                    g.FillRectangle(solidBrush, rect3);
+                    selectedBlock = 7;
+                    break;
+                case "DivertQueue":
+                    solidBrush.Color = Color.FromArgb(210, 200, 21);
+                    g.FillRectangle(solidBrush, rect3);
+                    selectedBlock = 8;
+                    break;
+                case "EvenSpeed":
+                    solidBrush.Color = Color.FromArgb(0, 200, 0);
+                    g.FillRectangle(solidBrush, rect3);
+                    selectedBlock = 9;
+                    break;
+                case "EnterQueue":
+                    solidBrush.Color = Color.FromArgb(31, 226, 226);
+                    g.FillRectangle(solidBrush, rect3);
+                    selectedBlock = 10;
+                    break;
+                case "Parking":
+                    solidBrush.Color = Color.FromArgb(255, 255, 255);
+                    g.FillRectangle(solidBrush, rect3);
+                    selectedBlock = 11;
+                    break;
+                case "Chute":
+                    solidBrush.Color = Color.FromArgb(100, 100, 0);
+                    g.FillRectangle(solidBrush, rect3);
+                    selectedBlock = 12;
+                    break;
+                case "Hospital":
+                    solidBrush.Color = Color.FromArgb(255, 100, 255);
+                    g.FillRectangle(solidBrush, rect3);
+                    selectedBlock = 13;
+                    break;
+                case "Empty":
+                    solidBrush.Color = Color.FromArgb(242, 242, 242);
+                    g.FillRectangle(solidBrush, rect3);
+                    selectedBlock = 0;
+                    break;
+                default:
+                    break;
+            }
+
+            ////Filling Rectangle
+            //Rectangle rect2 = new Rectangle((posX * btnW + 1) - offsetX, (posY * btnH + 1) - offsetY, btnH - 1, btnW - 1);
+            //solidBrush.Color = Color.FromArgb(100, 100, 0);
+            //g.FillRectangle(solidBrush, rect2);
+
+            pictureBox1.Image = rectBuffer;
         }
     }
 }
